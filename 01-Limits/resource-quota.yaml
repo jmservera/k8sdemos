@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-resources
+  namespace: limited
+spec:
+  hard:
+    cpu: 1.5
+    memory: 2Gi
+    pods: 2
+    limits.cpu: 2
