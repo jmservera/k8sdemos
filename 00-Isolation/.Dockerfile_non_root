@@ -1,0 +1,16 @@
+FROM ubuntu
+ARG USERNAME=nonroot
+
+RUN apt-get update && apt-get install -y mysql-server && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN usermod -d /var/lib/mysql/ mysql
+RUN service mysql start && mysql -u root -e "CREATE DATABASE testdb;"
+
+# use the non-root user for improving security
+RUN addgroup --gid 1001 $USERNAME && \
+    adduser --ingroup $USERNAME --shell /bin/false --disabled-password --no-create-home --uid 1001 $USERNAME && \
+    mkdir -p /var/log/$USERNAME
+RUN chown $USERNAME:$USERNAME /var/log/$USERNAME
+
+USER $USERNAME
+
+CMD ["/bin/sh","-c","id && ps aux"]
