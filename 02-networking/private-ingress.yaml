@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: private-ingress
+  namespace: networking
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+ ingressClassName: nginx-private
+ rules:
+  - host: test.internal.jm.com
+    http:
+      paths:
+      - backend:
+         service:
+          name: nginx-tea
+          port:
+            number: 80
+        path: /tea(/|$)(.*)
+        pathType: Prefix
+      - backend:
+         service:
+          name: nginx-coffee
+          port:
+            number: 80
+        path: /coffee(/|$)(.*)
+        pathType: Prefix
+      - path: /(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-coffee
+            port:
+              number: 80

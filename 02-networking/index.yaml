@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: index-html-coffee
+  namespace: networking
+data:
+  index.html: |
+    <html>
+    <body>
+    <h1>Hello Coffee</h1>
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: index-html-tea
+  namespace: networking
+data:
+  index.html: |
+    <html>
+    <body>
+    <h1>Hello Tea</h1>

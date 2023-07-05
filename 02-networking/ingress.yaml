@@ -1,0 +1,68 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: public-ingress
+  namespace: networking
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+ ingressClassName: nginx
+ rules:
+  - http:
+      paths:
+      - backend:
+         service:
+          name: nginx-tea
+          port:
+            number: 80
+        path: /tea(/|$)(.*)
+        pathType: Prefix
+      - backend:
+         service:
+          name: nginx-coffee
+          port:
+            number: 80
+        path: /coffee(/|$)(.*)
+        pathType: Prefix
+      - path: /(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-coffee
+            port:
+              number: 80
+#  tls:
+#  - hosts:
+#    - contoso.com
+#    secretName: contoso-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginx-tea
+  name: nginx-tea
+  namespace: networking
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx-tea
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginx-coffee
+  name: nginx-coffee
+  namespace: networking
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx-coffee

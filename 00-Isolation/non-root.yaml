@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: busybox
+  name: busybox
+spec:
+  containers:
+  - image: busybox
+    name: busybox
+    resources:
+      requests:
+        cpu: 0.5
+        memory: 256Mi
+      limits:
+        cpu: 2
+        memory: 512Mi
+    args:
+      - /bin/sh
+      - -c
+      - >
+        id;
+        while true; do echo -n ".";sleep 5; done;
+    # use non root user
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      runAsGroup: 3000
+  restartPolicy: Never
