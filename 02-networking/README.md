@@ -25,3 +25,9 @@ Now check that you have two ingress classes:
 k get ingressclass -A
 ```
 
+## Network policies
+
+1. Create a policy enabled cluster
+2. Check the system pods for npm
+3. Use this example from
+[Microsoft Learn](https://learn.microsoft.com/en-us/azure/aks/use-network-policies)
