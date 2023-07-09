@@ -4,4 +4,4 @@ RUN apt-get update && apt-get install -y mysql-server && apt-get clean && rm -rf
 RUN usermod -d /var/lib/mysql/ mysql
 RUN service mysql start && mysql -u root -e "CREATE DATABASE testdb;"
 
-CMD ["sh","-c","id && ps aux"]
+CMD ["/bin/sh","-c","id && ps aux"]

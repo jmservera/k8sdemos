@@ -1,11 +1,11 @@
 #/bin/sh
 
-docker build -f .Dockerfile_non_root . -t d-non-root
+docker build -f Dockerfile.non_root . -t d-non-root
 
 if [ "$1" = "-n" ]; then
     echo "***** Building non-root image only"
 else
-    docker build -f .Dockerfile_root . -t d-root
+    docker build -f Dockerfile.root . -t d-root
 fi
 
 echo ***** Running as ROOT

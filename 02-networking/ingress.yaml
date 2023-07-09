@@ -5,10 +5,14 @@ metadata:
   namespace: networking
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
+    #disable tls
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    
 spec:
  ingressClassName: nginx
  rules:
-  - http:
+  - host: aksdemo.servezas.org
+    http:
       paths:
       - backend:
          service:

@@ -10,7 +10,7 @@ spec:
     name: busybox
     resources:
       requests:
-        cpu: 0.5
+        cpu: 100m
         memory: 256Mi
       limits:
         cpu: 2
@@ -20,7 +20,7 @@ spec:
       - -c
       - >
         id;
-        while true; do echo -n ".";sleep 5; done;
+        while true; do echo ".";sleep 5; done;
     # use non root user
     securityContext:
       runAsNonRoot: true
