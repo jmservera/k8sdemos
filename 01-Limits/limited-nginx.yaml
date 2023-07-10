@@ -10,10 +10,10 @@ spec:
     name: nginx
     resources:
       requests:
-        cpu: 0.5
+        cpu: 200m
         memory: 256Mi
       limits:
-        cpu: 2
+        cpu: 400m
         memory: 512Mi
     ports:
     - containerPort: 80
